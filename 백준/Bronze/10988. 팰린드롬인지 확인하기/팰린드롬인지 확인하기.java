@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        char[] compare = input.toCharArray();
+        int result = 1;
+
+        for(int i=0;i<compare.length;i++){
+                if(compare[i] !=compare[compare.length-1-i]){
+                    result = 0;
+                }
+            }
+        System.out.println(result);
+        }
+    }
+
