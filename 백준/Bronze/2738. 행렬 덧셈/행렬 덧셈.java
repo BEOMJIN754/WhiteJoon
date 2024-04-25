@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
         Scanner sc  = new Scanner(System.in);
 
@@ -19,15 +19,9 @@ public class Main {
                 two[i][j] = sc.nextInt();
             }
         }
-        int[][] three = new int[R][C];
-        for(int i=0; i<R;i++){
-            for(int j=0;j<C;j++){
-                three[i][j] = one[i][j] + two[i][j];
-            }
-        }
         for(int i=0; i<R;i++) {
             for (int j = 0; j < C; j++) {
-                System.out.print(three[i][j] + " ");
+                System.out.print(one[i][j] + two[i][j] + " ");
             }
             System.out.println();
         }
