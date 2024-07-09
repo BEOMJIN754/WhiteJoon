@@ -1,14 +1,18 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
         // 첫 줄 입력
-        int N = scanner.nextInt();
-        int K = scanner.nextInt();
-        scanner.nextLine();  // 버퍼 비우기
-        String table = scanner.nextLine();
+        String[] firstLine = br.readLine().split(" ");
+        int N = Integer.parseInt(firstLine[0]);
+        int K = Integer.parseInt(firstLine[1]);
+        
+        // 두 번째 줄 입력
+        String table = br.readLine();
         
         // 사람과 햄버거 위치 파악
         char[] positions = table.toCharArray();
@@ -31,5 +35,8 @@ public class Main {
         
         // 결과 출력
         System.out.println(maxPeople);
+        
+        // BufferedReader 닫기
+        br.close();
     }
 }
