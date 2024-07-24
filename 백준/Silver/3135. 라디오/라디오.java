@@ -16,10 +16,6 @@ public class Main {
             favorites[i] = Integer.parseInt(br.readLine());
         }
         
-        System.out.println(findMinButtonPresses(A, B, favorites));
-    }
-    
-    public static int findMinButtonPresses(int A, int B, int[] favorites) {
         // 초기 거리: A에서 B까지 직접 이동
         int minPresses = Math.abs(A - B);
         
@@ -31,6 +27,6 @@ public class Main {
             }
         }
         
-        return minPresses;
+        System.out.println(minPresses);
     }
 }
