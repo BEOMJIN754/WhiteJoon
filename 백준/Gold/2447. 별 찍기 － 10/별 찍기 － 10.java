@@ -1,14 +1,19 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 
 public class Main {
 
     // 패턴을 담을 배열 선언
     static char[][] pattern;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        scanner.close();
+    public static void main(String[] args) throws IOException {
+        // 입력을 받기 위한 BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        br.close();
 
         pattern = new char[N][N];
 
@@ -22,15 +27,14 @@ public class Main {
         // 패턴을 그리는 재귀 함수 호출
         drawPattern(0, 0, N);
 
-        // 결과 출력
-        StringBuilder sb = new StringBuilder();
+        // 결과 출력을 위한 BufferedWriter
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                sb.append(pattern[i][j]);
-            }
-            sb.append('\n');
+            bw.write(pattern[i]);
+            bw.newLine();
         }
-        System.out.print(sb.toString());
+        bw.flush();
+        bw.close();
     }
 
     // 패턴을 그리는 재귀 함수
@@ -57,3 +61,4 @@ public class Main {
         }
     }
 }
+
