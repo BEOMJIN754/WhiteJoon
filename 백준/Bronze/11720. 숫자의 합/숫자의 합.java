@@ -8,7 +8,7 @@ public class Main{
 		String rNum = sc.next();
 		char[] sNum = rNum.toCharArray();
 		int sum=0;
-		for(int i=0;i<sNum.length;i++){
+		for(int i=0;i<N;i++){
 			sum += sNum[i] - '0' ;
 		}
 		System.out.println(sum);
