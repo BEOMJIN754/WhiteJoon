@@ -1,40 +1,34 @@
-import java.util.Comparator;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.PriorityQueue;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
 
-        // 절댓값 기준으로 정렬하되, 절댓값이 같으면 원래 값으로 비교하는 우선순위 큐
-        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
-            @Override
-            public int compare(Integer a, Integer b) {
-                int absA = Math.abs(a);
-                int absB = Math.abs(b);
-                if (absA == absB) {
-                    return Integer.compare(a, b); // 절댓값이 같으면 원래 값 기준 정렬
-                }
-                return Integer.compare(absA, absB); // 절댓값 기준 정렬
-            }
-        });
-
-        // 연산 처리
-        for (int i = 0; i < n; i++) {
-            int x = scanner.nextInt();
-            
-            if (x == 0) {
-                if (pq.isEmpty()) {
-                    System.out.println(0);
-                } else {
-                    System.out.println(pq.poll()); // 절댓값이 가장 작은 값 출력 및 제거
-                }
-            } else {
-                pq.add(x); // 값 추가
-            }
-        }
-
-        scanner.close();
-    }
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br =new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
+		PriorityQueue<Integer> myQueue = new PriorityQueue<>((o1,o2)->{
+		
+			int first_abs = Math.abs(o1);
+			int second_abs = Math.abs(o2);
+			if(first_abs == second_abs) {
+				return o1>o2?1:-1; //같으면 음수 우선 
+			}
+			return first_abs - second_abs; // 작은 데이터 우선
+			
+		});
+		for(int i=0;i<N; i++) {
+			int request = Integer.parseInt(br.readLine());
+			if(request ==0) {
+				if(myQueue.isEmpty()) {
+					System.out.println("0");
+				}else {
+					System.out.println(myQueue.poll());
+				}
+			}else {
+				myQueue.add(request);
+			}
+		}
+	}
 }
