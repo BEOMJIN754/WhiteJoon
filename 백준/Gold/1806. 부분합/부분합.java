@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) throws NumberFormatException, IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // 입력 처리
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int S = Integer.parseInt(st.nextToken());
@@ -18,28 +17,30 @@ public class Main {
             arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        // 투 포인터 알고리즘
-        int start = 0, end = 0, sum = 0, minLength = Integer.MAX_VALUE;
+        int start = 0;
+        int end = 0;
+        int sum = 0;
+        int m = 0; // 최소 길이를 저장할 변수
 
-        while (true) {
-            // 조건을 만족하면 최소 길이 갱신 후 start 이동
-            if (sum >= S) {
-                minLength = Math.min(minLength, end - start);
-                sum -= arr[start];
-                start++;
-            }
-            // 조건을 만족하지 못하면 end 이동
-            else if (end < N) {
-                sum += arr[end];
-                end++;
-            }
-            // 배열 범위를 초과하면 종료
-            else {
-                break;
+        // 슬라이딩 윈도우 기법
+        while (end < N) {
+            // sum을 end 위치까지 확장
+            sum += arr[end++];
+
+            // sum이 S 이상이 되면, start를 증가시키며 최소 길이를 갱신
+            while (sum >= S) {
+                if (m == 0 || end - start < m) { // 처음 갱신하거나 더 작은 구간을 찾았을 때
+                    m = end - start;
+                }
+                sum -= arr[start++]; // start 위치의 값을 빼고 start를 증가
             }
         }
 
-        // 결과 출력 (minLength가 갱신되지 않으면 0 출력)
-        System.out.println(minLength == Integer.MAX_VALUE ? 0 : minLength);
+        // 최소 길이가 갱신되지 않으면 0 출력
+        if (m == 0) {
+            System.out.println(0);
+        } else {
+            System.out.println(m);
+        }
     }
 }
