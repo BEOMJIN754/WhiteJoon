@@ -4,32 +4,22 @@ import java.util.*;
 public class Main {
     static long[] arr, tree;
 
-    // 세그먼트 트리 초기화
-    static long init(int node, int start, int end) {
-        if (start == end) {
-            return tree[node] = arr[start];
-        }
-        int mid = (start + end) / 2;
-        return tree[node] = init(node * 2, start, mid) + init(node * 2 + 1, mid + 1, end);
-    }
-
-    // 세그먼트 트리 업데이트
-    static void update(int node, int start, int end, int idx, long diff) {
-        if (idx < start || idx > end) return;
-        tree[node] += diff;
-        if (start != end) {
-            int mid = (start + end) / 2;
-            update(node * 2, start, mid, idx, diff);
-            update(node * 2 + 1, mid + 1, end, idx, diff);
+    // 펜윅 트리 업데이트
+    static void update(int idx, long diff, int n) {
+        while (idx <= n) {
+            tree[idx] += diff;
+            idx += idx & -idx;
         }
     }
 
-    // 구간 합 계산
-    static long query(int node, int start, int end, int left, int right) {
-        if (left > end || right < start) return 0;
-        if (left <= start && end <= right) return tree[node];
-        int mid = (start + end) / 2;
-        return query(node * 2, start, mid, left, right) + query(node * 2 + 1, mid + 1, end, left, right);
+    // 펜윅 트리 구간 합 계산
+    static long sum(int idx) {
+        long result = 0;
+        while (idx > 0) {
+            result += tree[idx];
+            idx -= idx & -idx;
+        }
+        return result;
     }
 
     public static void main(String[] args) throws IOException {
@@ -41,13 +31,12 @@ public class Main {
         int K = Integer.parseInt(st.nextToken());
 
         arr = new long[N + 1];
-        tree = new long[4 * N];
+        tree = new long[N + 1];
 
         for (int i = 1; i <= N; i++) {
             arr[i] = Long.parseLong(br.readLine());
+            update(i, arr[i], N); // 초기화
         }
-
-        init(1, 1, N);
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < M + K; i++) {
@@ -59,9 +48,9 @@ public class Main {
             if (a == 1) { // 값 변경
                 long diff = c - arr[b];
                 arr[b] = c;
-                update(1, 1, N, b, diff);
+                update(b, diff, N);
             } else if (a == 2) { // 구간 합
-                sb.append(query(1, 1, N, b, (int) c)).append("\n");
+                sb.append(sum((int) c) - sum(b - 1)).append("\n");
             }
         }
 
