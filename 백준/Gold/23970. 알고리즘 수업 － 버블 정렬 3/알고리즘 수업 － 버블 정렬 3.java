@@ -28,13 +28,13 @@ public class Main {
         }
         
         for (int i = 0; i < num - 1; i++) {
-            for (int j = 0; j < num - 1 - i; j++) {  // 버블 정렬
+            for (int j = 0; j < num - 1 - i; j++) { 
                 if (A[j] > A[j + 1]) {
                     int temp = A[j];
                     A[j] = A[j + 1];
                     A[j + 1] = temp;
                     
-                    if(A[j]==B[j]&&A[j+1]==B[j+1]&&Arrays.equals(A, B)) {
+                    if(A[j]==B[j]&&Arrays.equals(A, B)) {
                     	System.out.println(1);
                     	return;
                     }
