@@ -1,29 +1,39 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
-public class Main{
-    public static void main(String[] args) {
-        Scanner sc  = new Scanner(System.in);
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int R = sc.nextInt();
-        int C = sc.nextInt();
+        String[] dimensions = br.readLine().split(" ");
+        int n = Integer.parseInt(dimensions[0]);
+        int m = Integer.parseInt(dimensions[1]);
 
-        int[][] one = new int[R][C];
-        for(int i=0; i<R;i++){
-            for(int j=0;j<C;j++){
-                one[i][j] = sc.nextInt();
+        int[][] matrixA = new int[n][m];
+        int[][] matrixB = new int[n][m];
+
+        for (int i = 0; i < n; i++) {
+            String[] row = br.readLine().split(" ");
+            for (int j = 0; j < m; j++) {
+                matrixA[i][j] = Integer.parseInt(row[j]);
             }
         }
-        int[][] two = new int[R][C];
-        for(int i=0; i<R;i++){
-            for(int j=0;j<C;j++){
-                two[i][j] = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            String[] row = br.readLine().split(" ");
+            for (int j = 0; j < m; j++) {
+                matrixB[i][j] = Integer.parseInt(row[j]);
             }
         }
-        for(int i=0; i<R;i++) {
-            for (int j = 0; j < C; j++) {
-                System.out.print(one[i][j] + two[i][j] + " ");
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                sb.append(matrixA[i][j] + matrixB[i][j]).append(" ");
             }
-            System.out.println();
+            sb.append("\n");
         }
-        }
+        System.out.print(sb);
     }
+}
