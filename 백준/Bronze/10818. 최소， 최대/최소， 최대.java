@@ -1,29 +1,16 @@
-
-
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        int n = scanner.nextInt();
-        int[] num = new int[n];
-
-        for(int i=0;i<n;i++){
-            int input = scanner.nextInt();
-            num[i] = input;
+        Scanner scan = new Scanner(System.in);
+        int N = scan.nextInt();
+        int min = 1000001, max = -1000001;
+        for (int i = 0; i < N; i++) {
+            int cur = scan.nextInt();
+            min = Math.min(min, cur);
+            max = Math.max(max, cur);
+            }
+            System.out.println(min+" "+max);
         }
 
-        int minnum = num[0];
-        int maxnum = num[0];
-        for (int i =1; i<n;i++){
-            if(minnum>num[i]){
-                minnum = num[i];
-            }
-            if(num[i]>maxnum){
-                maxnum=num[i];
-            }
-        }
-        System.out.println(minnum+" "+maxnum);
     }
-}
