@@ -1,25 +1,27 @@
-
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int n= scanner.nextInt();
-        int[] input = new int[n]; // 몇 개의 숫자를 넣을지 선택
-        for(int i=0;i<n;i++){
-            input[i] = scanner.nextInt(); // 입력받은 값을 넣어준다.
+        int a = Integer.parseInt(br.readLine());
+        String[] str = br.readLine().split(" ");
+        int[] arr = new int[str.length];
+        int b = Integer.parseInt(br.readLine());
+        int cnt = 0;
 
+        for(int i=0; i<str.length; i++) {
+            arr[i] = Integer.parseInt(str[i]);
         }
-        int wanted = scanner.nextInt(); //찾고싶은 숫자 입력
-        int count = 0;
-        for(int i=0; i<input.length;i++){
-            if(wanted==input[i]){
-                count+=1;
+
+        for(int i=0; i<arr.length; i++) {
+            if(arr[i] == b) {
+                cnt++;
             }
         }
 
-        System.out.println(count);
-        scanner.close();
+        System.out.println(cnt);
     }
 }
