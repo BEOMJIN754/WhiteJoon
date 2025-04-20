@@ -1,25 +1,17 @@
 import java.util.Scanner;
-
-public class Main{
+public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        int h = sc.nextInt();
+        int m = sc.nextInt();
 
-        int[] arr = new int[2];
+        m -= 45;
+        if (m < 0) {
+            m += 60;
+            h -= 1;
+            if (h < 0) h = 23;
+        }
 
-        for(int i=0;i< arr.length;i++){
-            arr[i] = scanner.nextInt();
-        }
-        if(arr[1]>=45){
-            arr[1] -=45;
-        }else{
-            if(arr[0]==0){
-                arr[0] = 23;
-                arr[1] +=15;
-            }else{
-                arr[0]-=1;
-                arr[1] += 15;
-            }
-        }
-        System.out.println(arr[0]+ " "+ arr[1]);
+        System.out.println(h + " " + m);
     }
 }
