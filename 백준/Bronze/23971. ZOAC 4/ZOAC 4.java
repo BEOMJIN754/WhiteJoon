@@ -7,14 +7,21 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        long H = Long.parseLong(st.nextToken());
-        long W = Long.parseLong(st.nextToken());
-        long N = Long.parseLong(st.nextToken());
-        long M = Long.parseLong(st.nextToken());
+        int H = Integer.parseInt(st.nextToken());
+        int W = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        long rows = (H + N) / (N + 1);
-        long cols = (W + M) / (M + 1);
+        int rowCount = 0;
+        for (int i = 0; i < H; i += (N + 1)) {
+            rowCount++;
+        }
 
-        System.out.println(rows * cols);
+        int colCount = 0;
+        for (int j = 0; j < W; j += (M + 1)) {
+            colCount++;
+        }
+
+        System.out.println(rowCount * colCount);
     }
 }
