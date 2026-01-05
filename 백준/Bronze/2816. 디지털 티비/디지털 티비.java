@@ -1,61 +1,41 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        String[] a = new String[n];
+        for (int i = 0; i < n; i++) a[i] = br.readLine();
+
+        StringBuilder sb = new StringBuilder();
+
+        int idx1 = find(a, "KBS1");
+        for (int i = 0; i < idx1; i++) sb.append('1');
+        for (int i = idx1; i > 0; i--) {
+            swap(a, i, i - 1);
+            sb.append('4');
+        }
+
+        int idx2 = find(a, "KBS2");
+        for (int i = 0; i < idx2; i++) sb.append('1');
+        for (int i = idx2; i > 1; i--) {
+            swap(a, i, i - 1);
+            sb.append('4');
+        }
+
+        System.out.print(sb.toString());
+    }
+
+    static int find(String[] a, String target) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i].equals(target)) return i;
+        }
+        return -1;
+    }
+
     static void swap(String[] a, int i, int j) {
         String t = a[i];
         a[i] = a[j];
         a[j] = t;
-    }
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        int n = Integer.parseInt(br.readLine());
-        String[] arr = new String[n];
-        for (int i = 0; i < n; i++) arr[i] = br.readLine();
-
-        int cursor = 0;
-
-        int kbs1 = 0;
-        for (int i = 0; i < n; i++) {
-            if (arr[i].equals("KBS1")) {
-                kbs1 = i;
-                break;
-            }
-        }
-
-        while (cursor < kbs1) {
-            System.out.print("1");
-            cursor++;
-        }
-
-        while (kbs1 > 0) {
-            System.out.print("4");
-            swap(arr, kbs1, kbs1 - 1);
-            kbs1--;
-            cursor--;
-        }
-
-        int kbs2 = 0;
-        for (int i = 0; i < n; i++) {
-            if (arr[i].equals("KBS2")) {
-                kbs2 = i;
-                break;
-            }
-        }
-
-        while (cursor < kbs2) {
-            System.out.print("1");
-            cursor++;
-        }
-
-        while (kbs2 > 1) {
-            System.out.print("4");
-            swap(arr, kbs2, kbs2 - 1);
-            kbs2--;
-            cursor--;
-        }
     }
 }
