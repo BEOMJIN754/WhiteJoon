@@ -1,41 +1,41 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        String[] a = new String[n];
-        for (int i = 0; i < n; i++) a[i] = br.readLine();
+        int roop = Integer.parseInt(br.readLine());
+
+        List<String> a = new ArrayList<>();
+        for(int i=0;i<roop;i++) a.add(br.readLine());
 
         StringBuilder sb = new StringBuilder();
-
-        int idx1 = find(a, "KBS1");
-        for (int i = 0; i < idx1; i++) sb.append('1');
-        for (int i = idx1; i > 0; i--) {
-            swap(a, i, i - 1);
-            sb.append('4');
+        int kbs1=a.indexOf("KBS1");
+        int count =0;
+        while(count<kbs1){
+            sb.append("1");
+            count++;
         }
-
-        int idx2 = find(a, "KBS2");
-        for (int i = 0; i < idx2; i++) sb.append('1');
-        for (int i = idx2; i > 1; i--) {
-            swap(a, i, i - 1);
-            sb.append('4');
+        while(count>0){
+            sb.append("4");
+            Collections.swap(a,kbs1,kbs1-1);
+            kbs1--;
+            count--;
         }
-
-        System.out.print(sb.toString());
-    }
-
-    static int find(String[] a, String target) {
-        for (int i = 0; i < a.length; i++) {
-            if (a[i].equals(target)) return i;
+        int kbs2 = a.indexOf("KBS2");
+        while(count<kbs2){
+            sb.append("1");
+            count++;
         }
-        return -1;
-    }
-
-    static void swap(String[] a, int i, int j) {
-        String t = a[i];
-        a[i] = a[j];
-        a[j] = t;
+        while(count>1){
+            sb.append("4");
+            Collections.swap(a,kbs2,kbs2-1);
+            kbs2--;
+            count--;
+        }
+        System.out.println(sb.toString());
     }
 }
