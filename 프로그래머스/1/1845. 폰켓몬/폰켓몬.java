@@ -1,19 +1,9 @@
-import java.util.Set;
-import java.util.HashSet;
+import java.util.Arrays;
 
 class Solution {
     public int solution(int[] nums) {
-        
-        int cnt = 0;
-        int half = nums.length /2;
-        Set<Integer> set = new HashSet<>();
-        for(int num:nums){
-            if(set.add(num)){
-                cnt++;
-            }
-        }
-        if(cnt>half){cnt = half;}
-        int answer = cnt;
-        return answer;
+        // distinct().count()는 long 반환 → int로 캐스팅
+        int distinctCount = (int) Arrays.stream(nums).distinct().count();
+        return Math.min(distinctCount, nums.length / 2);
     }
 }
