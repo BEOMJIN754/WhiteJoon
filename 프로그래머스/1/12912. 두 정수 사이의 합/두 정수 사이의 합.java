@@ -1,17 +1,10 @@
-import java.util.*;
 class Solution {
+
     public long solution(int a, int b) {
-        
-        long answer =0;
-        
-        if(a==b)return a;
-        int min, max;
-        min = Math.min(a,b);
-        max = Math.max(a,b);
-        
-        for(int i=min; i<=max;i++){
-            answer +=i;
-        }
-        return answer;
+        return sumAtoB(Math.min(a, b), Math.max(b, a));
+    }
+
+    private long sumAtoB(long a, long b) {
+        return (b - a + 1) * (a + b) / 2;
     }
 }
