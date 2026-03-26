@@ -1,9 +1,12 @@
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
     public int solution(int[] nums) {
-        // distinct().count()는 long 반환 → int로 캐스팅
-        int distinctCount = (int) Arrays.stream(nums).distinct().count();
-        return Math.min(distinctCount, nums.length / 2);
+        Set<Integer> hash = new HashSet<>();
+        for(int i=0;i<nums.length;i++){
+            hash.add(nums[i]);
+        }
+        
+                return Math.min(hash.size(), nums.length / 2);
     }
 }
