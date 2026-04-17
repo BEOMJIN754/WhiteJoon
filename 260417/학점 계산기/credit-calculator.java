@@ -17,7 +17,7 @@ public class Main {
     System.out.printf("%.1f%n",avg);
     if(avg>4.0) System.out.println("Perfect");
     else if(avg>3.0) System.out.println("Good");
-    else System.out.println("Perfect");
+    else System.out.println("Poor");
 
 
     }
