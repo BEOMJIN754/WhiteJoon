@@ -10,6 +10,7 @@ public class Main {
 
         for(int i=0; i<num; i++){
             int t = Integer.parseInt(st.nextToken());
+            if(t==0)break;
             arr[t/10]++;
         }
         
