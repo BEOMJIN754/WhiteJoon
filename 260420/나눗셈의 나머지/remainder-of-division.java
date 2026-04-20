@@ -11,7 +11,7 @@ public class Main {
         
         int[] cArr = new int[d];
 
-        while(t>0){
+        while(t>1){
             cArr[t%d]++;
             t = t/d;
         }
